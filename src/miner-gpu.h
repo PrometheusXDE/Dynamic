@@ -9,7 +9,7 @@
 #define ARGON2_GPU ARGON2_GPU_CUDA
 
 // TODO: configure
-#define HAVE_CUDA 0
+#define HAVE_CUDA 1
 
 #include "argon2-cuda/cuda-exception.h"
 #include "argon2-cuda/processing-unit.h"
