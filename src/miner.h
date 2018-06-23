@@ -24,7 +24,8 @@ class CWallet;
 namespace Consensus { struct Params; };
 
 static const bool DEFAULT_GENERATE = false;
-static const int DEFAULT_GENERATE_THREADS = 1;
+static const int DEFAULT_GENERATE_THREADS = -1;
+static const int DEFAULT_GENERATE_THREADS_GPU = -1;
 
 static const bool DEFAULT_PRINTPRIORITY = false;
 
@@ -40,7 +41,9 @@ struct CBlockTemplate
 bool CheckWork(const CChainParams& chainparams, CBlock* pblock, CWallet& wallet, CReserveKey& reservekey, CConnman* connman);
 #endif //ENABLE_WALLET
 /** Run the miner threads */
-void GenerateDynamics(bool fGenerate, int nThreads, const CChainParams& chainparams, CConnman& connman);
+void GenerateDynamics(int nCPUThreads, int nGPUThreads, const CChainParams& chainparams, CConnman& connman);
+/** Shuts down all miner threads */
+void ShutdownMiners();
 /** Generate a new block, without valid proof-of-work */
 std::unique_ptr<CBlockTemplate> CreateNewBlock(const CChainParams& chainparams, const CScript& scriptPubKeyIn);
 /** Modify the extranonce in a block */
